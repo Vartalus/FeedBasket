@@ -4,6 +4,10 @@
 
 A simple rss tool which uses bookmarks to save feeds and browsing history to track read/unread feed items.
 
+## Live Version
+
+See here for the live version: https://addons.mozilla.org/en-US/firefox/addon/feedbasket/
+
 ## Usage
 
 First, you need to install all
