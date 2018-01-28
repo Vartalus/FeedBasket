@@ -20,7 +20,7 @@ class Background {
 		let _this = this;
 		console.log("initialize");
 		browser.browserAction.setBadgeBackgroundColor({color: "gray"});
-		browser.bookmarks.search({title: "LiteRSS"}).then(this.checkFolder, this.onRejected);
+		browser.bookmarks.search({title: "FeedBasket"}).then(this.checkFolder, this.onRejected);
 		
 		//browser.theme.getCurrent().then((themeInfo) => console.log("Theme: " + JSON.stringify(themeInfo)));
 		//browser.theme.onUpdated.addListener(({ theme, windowId }) => {
@@ -126,7 +126,7 @@ class Background {
 	checkFolder(bookmarkItems) {
 		console.log("checkFolder");
 		if(bookmarkItems === 'undefined' || bookmarkItems.length === 0)
-			browser.bookmarks.create({title:"LiteRSS", index: 1, parentId:"menu________"}).then(this.processParentFolder, this.onRejected);
+			browser.bookmarks.create({title:"FeedBasket", index: 1, parentId:"menu________"}).then(this.processParentFolder, this.onRejected);
 		else {
 			this.processParentFolder(bookmarkItems[0]);
 		}
