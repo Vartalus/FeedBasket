@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "name": "FeedBasket",
+  "author": "Jason P.",
+  "description": "A simple rss tool which uses bookmarks to save feeds and browsing history to track read/unread feed items.",
+  "version": "0.3.5",
+
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "48": "images/feed-basket.svg",
+      "96": "images/feed-basket.svg" 
+    },
+    "default_title": "FeedBasket",
+    "default_popup": "popup.html"
+  },
+
+  "background": {
+    "scripts": ["dist/background.js"]
+  },
+  
+  "permissions": [
+    "<all_urls>", 
+	"*://*/*",
+    "bookmarks",
+	"activeTab",
+    "history",
+	"storage",
+	"theme"
+  ],
+  
+  "applications": {
+  "gecko": {
+    "id": "{6296829D-49D4-49B5-9AFD-85C226847467}",
+    "strict_min_version": "58.0"
+  }
+}
+}

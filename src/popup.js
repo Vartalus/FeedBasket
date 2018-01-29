@@ -7,6 +7,7 @@ import FaNewspaperO from 'react-icons/lib/fa/newspaper-o'
 import FaSliders from 'react-icons/lib/fa/sliders'
 import FaMoonO from 'react-icons/lib/fa/moon-o'
 import FaSunO from 'react-icons/lib/fa/sun-o'
+import FaRefresh from 'react-icons/lib/fa/refresh'
 
 import FeedEntry from './feedEntry';
 import Accordion from './accordion';
@@ -14,7 +15,7 @@ import Accordion from './accordion';
 class Popup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {bookmarkParentId: "", inputValue: "", rssFeeds: [ ], followFeeds: [ ], showDetails: false, showControls: true, darkMode: false };
+    this.state = {bookmarkParentId: "", inputValue: "", rssFeeds: [ ], followFeeds: [ ], showDetails: false, showControls: true, darkMode: false, rotation: 0 };
 	this.updateInputValue = this.updateInputValue.bind(this);
 	this.logTree = this.logTree.bind(this);
 	this.addRss = this.addRss.bind(this);
@@ -22,6 +23,7 @@ class Popup extends React.Component {
 	this.toggleControls = this.toggleControls.bind(this);
 	this.toggleDarkMode = this.toggleDarkMode.bind(this);
 	this.refreshFeeds = this.refreshFeeds.bind(this);
+	this.updateFeeds = this.updateFeeds.bind(this);
   }
   
   logTree(item) { 
@@ -47,9 +49,17 @@ class Popup extends React.Component {
   }
   
   refreshFeeds() {
+	let _this = this;
 	browser.runtime.sendMessage({ type:"feed_request" }).then((result) => {
       this.setState({rssFeeds : result.rssFeeds, followFeeds: result.followFeeds, showDetails: result.showDetails, showControls: result.showControls, darkMode: result.darkMode });
 	});
+  }
+  
+  updateFeeds() {
+	let _this = this;
+	browser.runtime.sendMessage({ type:"updateFeeds" });
+	_this.refreshFeeds();
+	_this.setState({rotation: 360 + _this.state.rotation })
   }
   
   addRss() {
@@ -109,6 +119,7 @@ class Popup extends React.Component {
 	let _this = this;
 	let defaultBtnColor = _this.state.darkMode ? 'white' : 'black';
 	let icon = _this.state.darkMode ? "images/feed-basket-white.svg" : "images/feed-basket.svg";
+	let style = {transform: 'rotate(' + _this.state.rotation + 'deg)'};
     return ( 
       <div className="mainDiv">
 		<ReactBody className="darkMode" if={_this.state.darkMode} />
@@ -116,6 +127,9 @@ class Popup extends React.Component {
 		<div className="header">
 			<img src={icon} />
 			<h1>FeedBasket</h1>
+			<button className="btnRefresh" style={style} title="Refresh Feeds" onClick={this.updateFeeds}>
+				<FaRefresh color={defaultBtnColor} size={26}/>
+			</button>
 			<button className="btnDarkMode" title="Toggle Light/Dark Mode" onClick={this.toggleDarkMode}>
 				{_this.state.darkMode && <FaMoonO color={defaultBtnColor} size={26}/>}
 				{!_this.state.darkMode && <FaSunO color={defaultBtnColor} size={26}/>}

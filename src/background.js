@@ -9,6 +9,7 @@ class Background {
 		this.addRss = this.addRss.bind(this);
 		this.initialize = this.initialize.bind(this);
 		this.monitorLoop = this.monitorLoop.bind(this);
+		this.updateFeeds = this.updateFeeds.bind(this);
 		//this.getIcon = this.getIcon.bind(this);
 		//this.handleUpdated = this.handleUpdated.bind(this);
 	
@@ -80,6 +81,9 @@ class Background {
 					sendResponse(true);
 				}
 				_this.settings.save();
+			}
+			else if(message.type === "updateFeeds") {
+				_this.updateFeeds();
 			}
 		});
 	}
@@ -161,14 +165,18 @@ class Background {
 		return result;
 	}
 	
+	updateFeeds(){
+		this.rssFeeds.map(function(feed) {
+			console.log(feed);
+			feed.update();
+		});
+	}
+	
 	monitorLoop(){
 		console.log("monitorLoop");
 		let _this = this;
 		setInterval(function() {
-			_this.rssFeeds.map(function(feed) {
-				console.log(feed);
-				feed.update();
-			});
+			_this.updateFeeds();
 		}, 30 * 60 * 1000 ) //30 minutes
 		
 		setInterval(function() {
