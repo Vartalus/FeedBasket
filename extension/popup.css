@@ -5,6 +5,7 @@ body {
 	overflow-x: hidden;
 	overflow-y: scroll;
 	min-height: 100px;
+	transition: all 0.5s ease-in-out;
 }
 
 h1 {
@@ -178,6 +179,19 @@ a > p {
 	color:gray;
 }
 
+.modal {
+	z-index: 999;
+}
+
+.modal-Btn {
+	width: 50%;
+	text-align: center;
+}
+
+.ReactModal__Content > h1 {
+	margin: 0;
+}
+
 .accordion {
 	padding-top: 85px;
 	/*border-bottom: 1px solid #999;*/
@@ -222,7 +236,7 @@ a > p {
 }
 
 .accordion > .acc-Node-Open > .acc-Header {
-	width: 84%;
+	width: 76%;
 	border-radius : 5px 0 0 0;
 }
 
@@ -231,7 +245,7 @@ a > p {
 }
 
 .accordion > .acc-Node:hover > .acc-Header, .accordion > .acc-Node > .acc-Header-NoHide {
-	width: 84%;
+	width: 76%;
 	border-top-right-radius:0;
 	border-bottom-right-radius:0;
 }
@@ -295,9 +309,9 @@ a > p {
 	padding-left: 0.4em;
 }
 
-.accordion > .acc-Node > .acc-Btn-NoHide {
+/*.accordion > .acc-Node > .acc-Btn-NoHide {
 	transition: none;
-}
+}*/
 
 .accordion > .acc-Node-Open > .acc-Btn {
 	width: 8%;
@@ -305,11 +319,11 @@ a > p {
 	padding-left: 0.4em;
 }
 
-.accordion > .acc-Node-Closed > .acc-Btn-follow {
+.accordion > .acc-Node-Closed > .acc-Btn-deleteFeed {
 	border-radius : 0 5px 5px 0;
 }
 
-.accordion > .acc-Node-Open > .acc-Btn-follow {
+.accordion > .acc-Node-Open > .acc-Btn-deleteFeed {
 	border-radius : 0 5px 0 0;
 }
 
@@ -323,7 +337,7 @@ a > p {
 }
 
 .accordion > .acc-Node > .acc-Content-Dark {
-	border-color: #404040;
+	border-color: #606060;
 }
 
 .accordion > .acc-Node > .acc-Content-Light {
@@ -331,6 +345,7 @@ a > p {
 }
 
 .accordion > .acc-Node-Open > .acc-Content { 
+	max-height: none;
 	opacity:1;
 	border-radius : 0 0 5px 5px;
 }
