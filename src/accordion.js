@@ -1,25 +1,36 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
+import Modal from 'react-modal';
+
 import FaCheck from 'react-icons/lib/fa/check'
+import FaClose from 'react-icons/lib/fa/close'
 import FaEye from 'react-icons/lib/fa/eye'
 import FaEyeSlash from 'react-icons/lib/fa/eye-slash'
+import FaTrashO from 'react-icons/lib/fa/trash-o'
 
 export default class Accordion extends React.Component {  
 	constructor(props) {
 		super(props);
 		this.state = {
-			index: typeof props.selectedIndex !== 'undefined' ? props.selectedIndex : -1
+			index: typeof props.selectedIndex !== 'undefined' ? props.selectedIndex : -1, dialogText: "", dialogUrl: ""
 		};
 		this.nodes = [];
 		this.addToHistory = this.addToHistory.bind(this);
 		this.followFeed = this.followFeed.bind(this);
 		this.updateUnread = this.updateUnread.bind(this);
+		this.deleteFeed = this.deleteFeed.bind(this);
+		this.renderModal = this.renderModal.bind(this);
+		this.deleteAndCloseModal = this.deleteAndCloseModal.bind(this);
+		this.closeModal = this.closeModal.bind(this);
 	}
 	
 	static defaultProps = {
 		transitionDuration: 500,
 		transitionTimingFunction: 'ease',
 		openClassName: 'open',
-		changeOnClick: true
+		changeOnClick: true,
+		bookmarkParentId: ""
 	}
 	
 	componentWillReceiveProps(props) {
@@ -50,6 +61,10 @@ export default class Accordion extends React.Component {
 				this.props.onUpdate();
 			}
 		}, 100);
+	}
+	
+	deleteFeed(url) {
+		this.setState({ dialogText: "Are you sure you want to delete the feed from: " + url + " ?", dialogUrl: url });
 	}
   
 	addToHistory(entry) {
@@ -104,6 +119,47 @@ export default class Accordion extends React.Component {
 			}, 50)
 		}
     }
+	
+	deleteAndCloseModal() {
+		let _this = this;
+		let _dialogUrl = _this.state.dialogUrl;
+		
+		if(_dialogUrl && _dialogUrl.length > 0) {
+			browser.bookmarks.getChildren(_this.props.bookmarkParentId).then((result) => {
+				if(result.length > 0) {
+					result.forEach(function(bookmark){
+					console.log("bookmark.url: " + bookmark.url + ", _dialogUrl: " + _dialogUrl);
+						if(bookmark.url == _dialogUrl) {
+							console.log("Removing Bookmark ID" + bookmark.id);
+							browser.bookmarks.remove(bookmark.id);
+							browser.runtime.reload();
+						}
+					});
+				}
+			});
+			
+			this.closeModal();
+		}
+		
+		this.closeModal();
+	}
+	
+	closeModal() {
+		this.setState({ dialogText: "", dialogUrl: "" })
+	}
+	
+	renderModal() {
+		let _this = this;
+		let bckColor = this.props.darkMode ? 'rgba(25, 25, 25, 0.75)' : 'rgba(255, 255, 255, 0.75)';
+		let textColor = this.props.darkMode ? ' white' : ' black';
+		
+		return <Modal isOpen={this.state.dialogText.length > 0} style={{overlay:{backgroundColor:bckColor, zIndex: 999},content:{backgroundColor:bckColor, color:{textColor}}}}>
+				<h1>Delete Confirmation</h1>
+				<p>{this.state.dialogText}</p>
+				<button className='modal-Btn' style={{color: textColor}} title="Confirm and Delete" onClick={this.deleteAndCloseModal}><FaCheck color={textColor} size={26}/> Yes</button>
+				<button className='modal-Btn' style={{color: textColor}} title="Cancel" onClick={this.closeModal}><FaClose color={textColor} size={26}/> No</button>
+			   </Modal>;
+	}
 
 	render() {
 		let _this = this;
@@ -122,9 +178,10 @@ export default class Accordion extends React.Component {
 					{child.props['data-follow'] && <FaEye color={_this.props.darkMode ? 'white' : 'black'} size={26}/>}
 					{!child.props['data-follow'] && <FaEyeSlash color={_this.props.darkMode ? 'white' : 'black'} size={26}/>}
 				</button>
+				<button className={btnHideClass + btnThemeClass + " acc-Btn acc-Btn-deleteFeed"} title="Delete Feed" onClick={function(){_this.deleteFeed(child.props['data-url'])}}><FaTrashO color={_this.props.darkMode ? 'white' : 'black'} size={26}/></button>
 				<div className={"acc-Content " + (_this.props.darkMode ? 'acc-Content-Dark' : 'acc-Content-Light')}>{child}</div>
 			</div>
 		))
-		return <div className='accordion'>{nodes}</div>
+		return <div className='accordion'>{nodes}{this.renderModal()}</div>
 	}
  }

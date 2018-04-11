@@ -51,7 +51,7 @@ class Popup extends React.Component {
   refreshFeeds() {
 	let _this = this;
 	browser.runtime.sendMessage({ type:"feed_request" }).then((result) => {
-      this.setState({rssFeeds : result.rssFeeds, followFeeds: result.followFeeds, showDetails: result.showDetails, showControls: result.showControls, darkMode: result.darkMode });
+      this.setState({rssFeeds : result.rssFeeds, followFeeds: result.followFeeds, showDetails: result.showDetails, showControls: result.showControls, darkMode: result.darkMode, bookmarkParentId: result.bookmarkParentId });
 	});
   }
   
@@ -137,17 +137,16 @@ class Popup extends React.Component {
 			<button className="btnDetails" title="View Details" onClick={this.toggleDetails}>
 				{<FaNewspaperO color={_this.state.showDetails ? defaultBtnColor : 'gray'} size={26}/>}
 			</button>
-			<button className="btnControls" title="View Details" onClick={this.toggleControls}>
+			<button className="btnControls" title="Toggle Feed Control Visibility" onClick={this.toggleControls}>
 				{<FaSliders color={_this.state.showControls ? defaultBtnColor : 'gray'} size={26}/>}
 			</button>
-			{/*<h4 className="cbxDescription"><input type="checkbox" onClick={this.toggleDetails} /> Descriptions</h4>*/}
 		</div>
 		<div className="subheader">
 			<input className="inputField" type="text" autofocus="autofocus" value={this.state.inputValue} onChange={this.updateInputValue}/>
 			<button className="addRssButton btn btn-block" title="Add RSS Feed" onClick={this.addRss}><FaPlus color={defaultBtnColor} size={26}/></button>
 		</div>
 		{this.state.rssFeeds.length == 0 && <div className="noFeeds">No Feeds</div>}
-		{this.state.rssFeeds.length > 0 && <Accordion onUpdate={function(){_this.refreshFeeds();}} showControls={_this.state.showControls} darkMode={_this.state.darkMode}>
+		{this.state.rssFeeds.length > 0 && <Accordion onUpdate={function(){_this.refreshFeeds();}} showControls={_this.state.showControls} darkMode={_this.state.darkMode} bookmarkParentId={_this.state.bookmarkParentId}>
 			{this.state.rssFeeds.map(function(object){
 				return <div data-header={object.rssTitle} data-url={object.url} data-entries={object.entries} data-follow={_this.state.followFeeds.includes(object.url)}>
 					{/*console.log(JSON.stringify(_this.state.rssData))*/}

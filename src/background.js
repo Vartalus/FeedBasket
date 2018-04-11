@@ -30,12 +30,14 @@ class Background {
 		//});
 		//browser.theme.onUpdated.addListener(this.handleUpdated);
 		
-		this.settings.load();
-		//this.settings.load().then(function() {
-		//	_this.settings.followFeeds.map(feed => {
-		//		_this.addRss(feed);
-		//	});
-		//});
+		//this.settings.load();
+		this.settings.load().then(function() {
+			browser.browserAction.setIcon({path: _this.settings.darkMode ? 'images/feed-basket-white.svg' : 'images/feed-basket.svg'});
+			//_this.settings.followFeeds.map(feed => {
+			//	_this.addRss(feed);
+			//});
+		});
+		
 		
 		browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
 			if(message.type === "feed_request") {
@@ -45,6 +47,7 @@ class Background {
 				result.showDetails = JSON.parse(JSON.stringify(_this.settings.showDetails));
 				result.showControls = JSON.parse(JSON.stringify(_this.settings.showControls));
 				result.darkMode = JSON.parse(JSON.stringify(_this.settings.darkMode));
+				result.bookmarkParentId = JSON.parse(JSON.stringify(_this.bookmarkParentId));
 				sendResponse(result);
 			}
 			else if(message.type === "addUrl") {
