@@ -60,7 +60,7 @@ export default class FeedEntry extends React.Component {
       <div className={this.state.hasVisited ? 'entry-visited' : 'entry-unvisited'}>
 		<p className={(this.state.hasVisited ? 'link visited' : 'link') + (this.props.darkMode ? ' link-Dark' : ' link-Light')}>
 		  <a href={this.props.url} target="_blank" title={this.props.title || this.props.url} onClick={this.linkClick}>
-			<h3>{this.props.title || this.props.url}</h3>
+			<h3 className={this.props.description ? 'title-description' : 'title-no-description'} >{(this.props.title || this.props.url)}</h3>
 			{this.props.description &&
 				<p>
 					{this.props.preview ? 
@@ -71,8 +71,8 @@ export default class FeedEntry extends React.Component {
 				</p>
 			}
 		  </a>
-		  {!this.state.hasVisited && <button className="markReadButton" title="Mark As Read" onClick={this.addToHistory}><FaCheck size={26}/></button>/*&#10003;*/} 
-		  {this.state.hasVisited && <button className="markUnreadButton" title="Mark As Unread" onClick={this.removeFromHistory}><FaClose size={26} /></button>/*&#10007;*/} 
+		  {!this.state.hasVisited && <button className="markReadButton" title="Mark As Read" onClick={this.addToHistory}><FaCheck size={20}/></button>/*&#10003;*/} 
+		  {this.state.hasVisited && <button className="markUnreadButton" title="Mark As Unread" onClick={this.removeFromHistory}><FaClose size={20} /></button>/*&#10007;*/} 
 		</p>
       </div>
     );

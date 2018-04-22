@@ -42,12 +42,19 @@ class Background {
 		browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
 			if(message.type === "feed_request") {
 				let result = new Object();
+				console.log("parsing rssFeeds");
 				result.rssFeeds = JSON.parse(JSON.stringify(_this.rssFeeds));
+				console.log("parsing followFeeds");
 				result.followFeeds = JSON.parse(JSON.stringify(_this.settings.followFeeds));
+				console.log("parsing showDetails");
 				result.showDetails = JSON.parse(JSON.stringify(_this.settings.showDetails));
+				console.log("parsing showControls");
 				result.showControls = JSON.parse(JSON.stringify(_this.settings.showControls));
+				console.log("parsing darkMode");
 				result.darkMode = JSON.parse(JSON.stringify(_this.settings.darkMode));
+				console.log("parsing bookmarkParentId");
 				result.bookmarkParentId = JSON.parse(JSON.stringify(_this.bookmarkParentId));
+				console.log("parsing done");
 				sendResponse(result);
 			}
 			else if(message.type === "addUrl") {
@@ -232,12 +239,18 @@ class Settings {
 						console.log("loaded followFeeds: " + JSON.stringify(item.followFeeds));
 						_this.followFeeds = item.followFeeds.slice();
 					}
-					console.log("loaded showDetails: " + JSON.stringify(item.showDetails));
-					_this.showDetails = item.showDetails;
-					console.log("loaded showControls: " + JSON.stringify(item.showControls));
-					_this.showControls = item.showControls;
-					console.log("loaded darkMode: " + JSON.stringify(item.darkMode));
-					_this.darkMode = item.darkMode;
+					if(item.showDetails) {
+						console.log("loaded showDetails: " + JSON.stringify(item.showDetails));
+						_this.showDetails = item.showDetails;
+					}
+					if(item.showControls) {
+						console.log("loaded showControls: " + JSON.stringify(item.showControls));
+						_this.showControls = item.showControls;
+					}
+					if(item.darkMode) {
+						console.log("loaded darkMode: " + JSON.stringify(item.darkMode));
+						_this.darkMode = item.darkMode;
+					}
 				}
 				resolve();
 			})
@@ -275,6 +288,7 @@ class RssFeed {
 				$.get(_this.url, function(data) {
 					let $xml = $($.parseXML(data.replace(NOT_SAFE_IN_XML_1_0, '')));
 					let array = [];
+					let count = 0;
 					_this.rssTitle = _this.rssTitle || $xml.find("title").first().text();
 					console.log("Xml loaded for " + _this.url)
 					$xml.find("item, entry").each(function() {
@@ -287,8 +301,12 @@ class RssFeed {
 								pubDate: $this.find("pubDate, published").text(),
 								author: $this.find("author").text()
 						}
-						if(item) {
+						if(count >= 20) {
+							return false;
+						}
+						else if(item) {
 							array.push(item);
+							count = count + 1;
 						}
 					});
 					

@@ -46,7 +46,7 @@ module.exports = {
 	   $: "jquery",
 	   jQuery: "jquery",
        jquery: 'jquery',
-	   "windows.jQuery": "jquery",
+	   "window.jQuery": "jquery",
 	   "window.$": "jquery"
 	}),
     new webpack.DefinePlugin({

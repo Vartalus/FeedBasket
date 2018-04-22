@@ -6,6 +6,7 @@ body {
 	overflow-y: scroll;
 	min-height: 100px;
 	transition: all 0.5s ease-in-out;
+	font-family: "Times New Roman", Times, serif;
 }
 
 h1 {
@@ -29,7 +30,7 @@ button:hover {
 }
 
 a {
-	width:93%;
+	width:94%;
 	display: inline-block;
 	color: inherit;
     text-decoration: none;
@@ -40,16 +41,23 @@ a {
 a > h2 {
 	background-color: inherit;
 	margin:0;
-	padding-bottom:.67em;
+	padding-bottom: 7px;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+a > h3 {
+	margin-block-start: 7px;
+	margin-block-end: 7px;
 }
 
 a > p {
 	width:93%;
 	background-color: inherit;
 	margin:0;
-	padding-bottom:.67em;
+	padding-bottom: 8px;
+	margin-block-start: 6px;
+	margin-block-end: 6px;
 }
 
 #app {
@@ -58,13 +66,13 @@ a > p {
 }
 
 .mainDiv {
-	padding: 1em;
+	padding: 12px;
 	background-color: inherit;
 	color: inherit;
 }
 
 .darkMode {
-	background-color: #2d2d30;
+	background-color: #353535;
 	color: white;
 }
 
@@ -76,7 +84,7 @@ a > p {
 .header {
 	top: 0;
 	border-bottom: 1px solid;
-	margin-bottom:2em;
+	margin-bottom:24px;
 	position:fixed;
     width:95%;
 	background-color: inherit;
@@ -86,7 +94,7 @@ a > p {
 .header > img {
 	vertical-align: bottom;
 	margin-bottom: 6px;
-	margin-right: 0.5em;
+	margin-right: 6px;
 }
 
 .subheader {
@@ -98,23 +106,23 @@ a > p {
 }
 
 .footer {
-	height:.5em;
+	height: 6px;
 	width:100%;
 	background-color: Gray;
 }
 
 .inputField {
-	margin-bottom: 1em;
-	width: 92%;
+	margin-bottom: 13px;
+	width: 93%;
 	display: inline-block;
-	height: 2em;
+	height: 26px;
 }
 
 .addRssButton {
-	margin-bottom: 1em;
-	margin-right:0.45em;
+	margin-bottom: 13px;
+	margin-right: 4px;
 	width: 6%;
-	height: 2em;
+	height: 26px;
 	vertical-align: top;
 	float: right;
 	padding-left: 2px;
@@ -129,10 +137,11 @@ a > p {
 }
 
 .btnDetails, .btnControls, .btnDarkMode, .btnRefresh {
-	margin-right:0.45em;
+	margin-right: 4px;
+	margin-left: 2px;
 	float: right;
 	margin-bottom: 0;
-	margin-top:1.146em;
+	margin-top: 15px;
 	transition-duration: 0.5s;
     transition-property: transform;
 }
@@ -140,6 +149,8 @@ a > p {
 .link {
 	background-color: inherit;
 	display: flex;
+	margin-block-start: 6px;
+	margin-block-end: 6px;
 }
 
 .link-Dark:hover > a {
@@ -157,17 +168,25 @@ a > p {
 	color: Gray;
 }
 
+.title-description {
+	
+}
+
+.title-no-description {
+	font-weight: normal;
+}
+
 .markReadButton {
 	color: green;
 	float:right;
-	padding-left: 5px;
+	padding-left: 7px;
 	width: 6%;
 }
 
 .markUnreadButton {
 	color: red;
 	float:right;
-	padding-left: 2px;
+	padding-left: 5px;
 	width: 6%;
 }
 
@@ -177,10 +196,6 @@ a > p {
 	font-size: x-large;
 	padding-bottom: 50px;
 	color:gray;
-}
-
-.modal {
-	z-index: 999;
 }
 
 .modal-Btn {
@@ -198,7 +213,7 @@ a > p {
 }
   
 .accordion > .acc-Node {
-	margin-bottom:1em;
+	margin-bottom: 5px;
 	padding: 0;
 	white-space: nowrap;
 }
@@ -207,22 +222,22 @@ a > p {
 	/*border: 1px solid #999;*/
 	display: inline-block;
 	border-bottom: 0;
-	padding: 0 0.7em 0 0.7em;
+	padding: 0 8px 0 8px;
 	border: 1px;
 	border-style: solid;
 	width: 100%;
-	height: 36px;
+	height: 30px;
 	transition: all 0.5s ease-in-out;
 }
 
 .accordion > .acc-Node > .acc-Header-Dark {
-	background-color: #262626;
-	border-color: #404040;
-	background: #262626; /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(#404040, #262626, #404040); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(#404040, #262626, #404040); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(#404040, #262626, #404040); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(#404040, #262626, #404040); /* Standard syntax */
+	background-color: #303030;
+	border-color: #303030;
+	background: #303030; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(#404040, #303030, #404040); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#404040, #303030, #404040); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#404040, #303030, #404040); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#404040, #303030, #404040); /* Standard syntax */
 }
 
 .accordion > .acc-Node > .acc-Header-Light {
@@ -236,7 +251,7 @@ a > p {
 }
 
 .accordion > .acc-Node-Open > .acc-Header {
-	width: 76%;
+	width: 79%;
 	border-radius : 5px 0 0 0;
 }
 
@@ -245,29 +260,31 @@ a > p {
 }
 
 .accordion > .acc-Node:hover > .acc-Header, .accordion > .acc-Node > .acc-Header-NoHide {
-	width: 76%;
+	width: 79%;
 	border-top-right-radius:0;
 	border-bottom-right-radius:0;
 }
 
 .accordion > .acc-Node-Open > .acc-Header:before {
-	content: "⮟" /*\00a0\00a0*/
+	/*content: "⮟" \00a0\00a0*/
 }
 
 .accordion > .acc-Node-Closed > .acc-Header:before {
-	content: "⮞"
+	/*content: "⮞"*/
 }
 
 .accordion > .acc-Node > .acc-Header > .acc-Title {
 	width: 85%;
 	display: inline-flex;
-	padding: 0.7em;
+	padding: 6px;
+	font-weight: bold;
+	overflow: -moz-hidden-unscrollable;
 }
 
 .accordion > .acc-Node > .acc-Header > .acc-UnreadCnt {
 	width: 12%;
 	display: inline-flex;
-	padding: 0.7em;
+	padding: 6px;
 	padding-left: 0;
 	font-size: 80%;
 	text-align: right;
@@ -277,20 +294,21 @@ a > p {
 .accordion > .acc-Node > .acc-Btn {
 	position: relative;
 	border-style: solid;
-	padding-bottom: 0.25em;
-	padding-top: 0.38em;
-	height: 2.7em;
+	padding-bottom: 3px;
+	padding-top: 2px;
+	height: 30px;
 	transition: all 0.5s ease-in-out;
+	/*top: 2px;*/
 }
 	
 .accordion > .acc-Node > .acc-Btn-Dark {
-	background-color: #333333;
-	border-color: #404040;
-	background: #333333; /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(#333333, black, #333333); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(#333333, black, #333333); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(#333333, black, #333333); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(#333333, black, #333333); /* Standard syntax */
+	background-color: #303030;
+	border-color: #303030;
+	background: #303030; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(#262626, #303030, #262626); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#262626, #303030, #262626); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#262626, #303030, #262626); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#262626, #303030, #262626); /* Standard syntax */
 }
 	
 .accordion > .acc-Node > .acc-Btn-Light {
@@ -304,9 +322,9 @@ a > p {
 }
 
 .accordion > .acc-Node:hover > .acc-Btn, .accordion > .acc-Node > .acc-Btn-NoHide {
-	width: 8%;
+	width: 7%;
 	border: 1px;
-	padding-left: 0.4em;
+	padding-left: 5px;
 }
 
 /*.accordion > .acc-Node > .acc-Btn-NoHide {
@@ -314,9 +332,9 @@ a > p {
 }*/
 
 .accordion > .acc-Node-Open > .acc-Btn {
-	width: 8%;
+	width: 7%;
 	border: 1px;
-	padding-left: 0.4em;
+	padding-left: 5px;
 }
 
 .accordion > .acc-Node-Closed > .acc-Btn-deleteFeed {
@@ -330,14 +348,14 @@ a > p {
 .accordion > .acc-Node > .acc-Content {
 	transition: all 0.5s ease-in-out;
 	overflow: hidden;
-	border: 1px;
+	border: 2px;
 	border-top-width: 0;
 	border-style: solid;
 	padding: 0 5px 0 5px;
 }
 
 .accordion > .acc-Node > .acc-Content-Dark {
-	border-color: #606060;
+	border-color: #303030;
 }
 
 .accordion > .acc-Node > .acc-Content-Light {

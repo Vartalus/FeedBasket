@@ -96,9 +96,19 @@ class Popup extends React.Component {
   
   toggleDetails() {
 	browser.runtime.sendMessage({ type:"showDetails", showDetails: !this.state.showDetails });
+	let scrollTop = $(window).scrollTop();
+	let docHeight = $(document).height();
+	let winHeight = $(window).height();
+	let scrollPercent = (scrollTop) / (docHeight - winHeight);
     this.setState({
       showDetails: !this.state.showDetails
 	});
+	
+	setTimeout(() => { 
+		docHeight = $(document).height();
+		winHeight = $(window).height();
+		$(window).scrollTop(scrollPercent * (docHeight - winHeight));
+	}, 100);
   }
   
   toggleControls() {
@@ -120,6 +130,9 @@ class Popup extends React.Component {
 	let defaultBtnColor = _this.state.darkMode ? 'white' : 'black';
 	let icon = _this.state.darkMode ? "images/feed-basket-white.svg" : "images/feed-basket.svg";
 	let style = {transform: 'rotate(' + _this.state.rotation + 'deg)'};
+	
+	//$( "#draggable" ).draggable();
+	
     return ( 
       <div className="mainDiv">
 		<ReactBody className="darkMode" if={_this.state.darkMode} />

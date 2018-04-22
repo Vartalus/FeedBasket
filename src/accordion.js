@@ -8,6 +8,9 @@ import FaClose from 'react-icons/lib/fa/close'
 import FaEye from 'react-icons/lib/fa/eye'
 import FaEyeSlash from 'react-icons/lib/fa/eye-slash'
 import FaTrashO from 'react-icons/lib/fa/trash-o'
+import FaCaretRight from 'react-icons/lib/fa/caret-right'
+import FaCaretDown from 'react-icons/lib/fa/caret-down'
+
 
 export default class Accordion extends React.Component {  
 	constructor(props) {
@@ -153,7 +156,7 @@ export default class Accordion extends React.Component {
 		let bckColor = this.props.darkMode ? 'rgba(25, 25, 25, 0.75)' : 'rgba(255, 255, 255, 0.75)';
 		let textColor = this.props.darkMode ? ' white' : ' black';
 		
-		return <Modal isOpen={this.state.dialogText.length > 0} style={{overlay:{backgroundColor:bckColor, zIndex: 999},content:{backgroundColor:bckColor, color:{textColor}}}}>
+		return <Modal isOpen={this.state.dialogText.length > 0} style={{overlay:{backgroundColor:bckColor, zIndex: 999},content:{backgroundColor:bckColor, color:{textColor}, "max-height": '180px'}}}>
 				<h1>Delete Confirmation</h1>
 				<p>{this.state.dialogText}</p>
 				<button className='modal-Btn' style={{color: textColor}} title="Confirm and Delete" onClick={this.deleteAndCloseModal}><FaCheck color={textColor} size={26}/> Yes</button>
@@ -170,15 +173,19 @@ export default class Accordion extends React.Component {
 		const nodes = React.Children.map(this.props.children, (child, index) => (
 			<div key={index} ref={div => { this.nodes[index] = { ref: div } }} className={this.state.index === index ? "acc-Node acc-Node-Open" : "acc-Node acc-Node-Closed"}>
 				<div className={headerHideClass + " acc-Header " + (_this.props.darkMode ? 'acc-Header-Dark' : 'acc-Header-Light')}>
-					<span className="acc-Title" onClick={() => this.toggle(index, true)}>{child.props['data-header']}</span>
+					{this.state.index !== index && <FaCaretRight color='black' size={14} style={{marginBottom: '2px'}}/>}
+					{this.state.index === index && <FaCaretDown color='black' size={14}/>}
+					<span className="acc-Title" title={child.props['data-header']} onClick={() => this.toggle(index, true)}>
+						{child.props['data-header']}
+					</span>
 					<span className="acc-UnreadCnt" onClick={() => this.toggle(index, true)}></span>
 				</div>
-				<button className={btnHideClass + btnThemeClass + " acc-Btn acc-Btn-markAllRead"} title="Mark All As Read" onClick={function(){_this.addAllToHistory(child.props['data-entries'])}}><FaCheck color={_this.props.darkMode ? 'white' : 'black'} size={26}/></button>
+				<button className={btnHideClass + btnThemeClass + " acc-Btn acc-Btn-markAllRead"} title="Mark All As Read" onClick={function(){_this.addAllToHistory(child.props['data-entries'])}}><FaCheck color={_this.props.darkMode ? 'white' : 'black'} size={20}/></button>
 				<button className={btnHideClass + btnThemeClass + " acc-Btn acc-Btn-follow"} title="Follow Feed" onClick={function(){_this.followFeed(child.props['data-url'])}}>
-					{child.props['data-follow'] && <FaEye color={_this.props.darkMode ? 'white' : 'black'} size={26}/>}
-					{!child.props['data-follow'] && <FaEyeSlash color={_this.props.darkMode ? 'white' : 'black'} size={26}/>}
+					{child.props['data-follow'] && <FaEye color={_this.props.darkMode ? 'white' : 'black'} size={20}/>}
+					{!child.props['data-follow'] && <FaEyeSlash color={_this.props.darkMode ? 'white' : 'black'} size={20}/>}
 				</button>
-				<button className={btnHideClass + btnThemeClass + " acc-Btn acc-Btn-deleteFeed"} title="Delete Feed" onClick={function(){_this.deleteFeed(child.props['data-url'])}}><FaTrashO color={_this.props.darkMode ? 'white' : 'black'} size={26}/></button>
+				<button className={btnHideClass + btnThemeClass + " acc-Btn acc-Btn-deleteFeed"} title="Delete Feed" onClick={function(){_this.deleteFeed(child.props['data-url'])}}><FaTrashO color={_this.props.darkMode ? 'white' : 'black'} size={20}/></button>
 				<div className={"acc-Content " + (_this.props.darkMode ? 'acc-Content-Dark' : 'acc-Content-Light')}>{child}</div>
 			</div>
 		))
