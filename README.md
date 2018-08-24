@@ -30,7 +30,7 @@ around [web-ext][web-ext]:
     npm start
 
 Any time you edit a file, [web-ext][web-ext] will reload the extension
-in Firefox. To see the popup, click the watermelon icon from the browser bar.
+in Firefox. To see the popup, click the icon from the browser bar.
 Here is what it looks like:
 
 ![FeedBasket screenshot](screenshots/feedbasket.png "FeedBasket screenshot")
