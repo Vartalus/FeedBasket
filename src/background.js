@@ -20,6 +20,7 @@ class Background {
 	initialize() {
 		let _this = this;
 		console.log("initialize");
+		browser.browserAction.setBadgeTextColor({color: "white"});
 		browser.browserAction.setBadgeBackgroundColor({color: "gray"});
 		browser.bookmarks.search({title: "FeedBasket"}).then(this.checkFolder, this.onRejected);
 		
