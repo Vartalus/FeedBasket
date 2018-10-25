@@ -173,8 +173,8 @@ export default class Accordion extends React.Component {
 		const nodes = React.Children.map(this.props.children, (child, index) => (
 			<div key={index} ref={div => { this.nodes[index] = { ref: div } }} className={this.state.index === index ? "acc-Node acc-Node-Open" : "acc-Node acc-Node-Closed"}>
 				<div className={headerHideClass + " acc-Header " + (_this.props.darkMode ? 'acc-Header-Dark' : 'acc-Header-Light')}>
-					{this.state.index !== index && <FaCaretRight color='black' size={14} style={{marginBottom: '2px'}}/>}
-					{this.state.index === index && <FaCaretDown color='black' size={14}/>}
+					{this.state.index !== index && <FaCaretRight color={_this.props.darkMode ? 'white' : 'black'} size={14} style={{marginBottom: '2px'}}/>}
+					{this.state.index === index && <FaCaretDown color={_this.props.darkMode ? 'white' : 'black'} size={14}/>}
 					<span className="acc-Title" title={child.props['data-header']} onClick={() => this.toggle(index, true)}>
 						{child.props['data-header']}
 					</span>

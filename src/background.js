@@ -272,7 +272,8 @@ class RssFeed {
 		let _this = this;
 		this.unreadCount = 0;
 		_this.entries.map(function(entry) {
-			browser.history.search({text: entry.link + " " + entry.title}).then(historyItems => { 
+			//browser.history.search({text: entry.link + " " + entry.title}).then(historyItems => { 
+			browser.history.getVisits({url: entry.link}).then(historyItems => { 
 				if(historyItems.length === 0) {
 					_this.unreadCount += 1;
 				}

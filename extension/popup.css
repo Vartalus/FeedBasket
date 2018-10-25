@@ -294,8 +294,8 @@ a > p {
 .accordion > .acc-Node > .acc-Btn {
 	position: relative;
 	border-style: solid;
-	padding-bottom: 3px;
-	padding-top: 2px;
+	/*padding-bottom: 3px;
+	padding-top: 2px;*/
 	height: 30px;
 	transition: all 0.5s ease-in-out;
 	/*top: 2px;*/
