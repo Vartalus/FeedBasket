@@ -8,6 +8,10 @@ A simple rss tool which uses bookmarks to save feeds and browsing history to tra
 
 See here for the live version: https://addons.mozilla.org/en-US/firefox/addon/feedbasket/
 
+## Required installations
+
+Make sure you have [NodeJS][nodejs] installed along with [Python2][python2]. This was last tested using NodeJS 12.14.1 and Python 2.7.17. If you use later versions of these apps, the package.json devDependencies may need updating, especially node-sass.
+
 ## Usage
 
 First, you need to install all
@@ -38,3 +42,4 @@ Here is what it looks like:
 [react]: https://facebook.github.io/react/
 [nodejs]: https://nodejs.org/en/
 [web-ext]: https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Getting_started_with_web-ext
+[python2]: https://www.python.org/downloads/windows/
