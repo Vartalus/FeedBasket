@@ -30,7 +30,7 @@
     "node-sass": "^4.13.1",
     "sass-loader": "6.0.6",
     "style-loader": "0.18.2",
-    "web-ext": "1.6.0",
+    "web-ext": "7.2.0",
     "webpack": "3.10.0",
     "webpack-dev-server": "2.9.7",
     "prop-types": "15.6.0",
